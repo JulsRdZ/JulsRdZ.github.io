@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Crecimiento de Lechuga</title>
+</head>
+<body>
+    <h1>Calculadora de Crecimiento de Lechuga</h1>
+    <form id="formulario">
+        <label for="crecimientoInicial">Crecimiento inicial (cm):</label>
+        <input type="number" id="crecimientoInicial" required><br><br>
+        
+        <label for="crecimientoFinal">Crecimiento final (cm):</label>
+        <input type="number" id="crecimientoFinal" required><br><br>
+        
+        <label for="horas">Tiempo de funcionamiento (horas):</label>
+        <input type="number" id="horas" required><br><br>
+        
+        <button type="submit">Calcular</button>
+    </form>
+
+    <div id="resultados"></div>
+
+    <script>
+        document.getElementById("formulario").addEventListener("submit", function(event) {
+            event.preventDefault(); // Evitar que se recargue la página
+            
+            const crecimientoInicial = parseFloat(document.getElementById("crecimientoInicial").value);
+            const crecimientoFinal = parseFloat(document.getElementById("crecimientoFinal").value);
+            const horas = parseFloat(document.getElementById("horas").value);
+
+            const vacre = crecimientoFinal - crecimientoInicial;
+            const potencia = 0.00006;
+            const energiaGenerada = potencia * horas;
+
+            let resultados = `
+                <h2>Resultados</h2>
+                <p>Crecimiento de la lechuga: ${vacre} cm</p>
+                <p>Energía generada: ${energiaGenerada.toFixed(6)} kWh</p>
+            `;
+
+            // Consejos
+            if (vacre < 5) {
+                resultados += `<p>Consejo: Asegúrate de que la solución nutritiva sea adecuada y revisa la iluminación.</p>`;
+            } else if (vacre < 15) {
+                resultados += `<p>Consejo: Mantén el nivel de nutrientes y ajusta la altura del LED para mejorar la luz.</p>`;
+            } else {
+                resultados += `<p>Consejo: Ya casi está lista para cosechar. Verifica la humedad y las condiciones generales.</p>`;
+            }
+
+            // Recordatorios
+            resultados += `
+                <h2>Recordatorios:</h2>
+                <ul>
+                    <li>Revisa la bomba de agua regularmente.</li>
+                    <li>Asegúrate de que el sistema hidroeléctrico funcione correctamente.</li>
+                    <li>Cosecha cuando estén listos para maximizar el sabor.</li>
+                </ul>
+                <p>Gracias por apoyar nuestro proyecto EcoPeztrol!</p>
+            `;
+
+            // Mostrar resultados en la página
+            document.getElementById("resultados").innerHTML = resultados;
+        });
+    </script>
+</body>
+</html>
